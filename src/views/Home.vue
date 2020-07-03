@@ -1,7 +1,12 @@
 <script>
 import axios from "axios";
+import Item from '@/views/Item.vue'
+
 export default {
   name: "home",
+  components: {
+    'item': Item
+  },
   data: function() {
     return {
       err: "",
@@ -37,16 +42,17 @@ export default {
 </script>
 
 <template>
-  <div>
-    <p>Homepage</p>
-    <div v-for="story in stories" :key="story.id">
-      <h2>{{ story.data.title }}</h2>
-      <p>Type: {{ story.data.type }}</p>
-      <p>Link: {{ story.data.url }}</p>
-      <p>Score: {{ story.data.score }}</p>
-    </div>
+  <div class="home">
+    <h1>Homepage</h1>
+    <item v-for="story in stories" :key="story.data.id" :story="story"> 
+    </item>
   
   </div>
 </template>
 
+<style  scoped>
+.home {
+  padding: 20px;
+}
+</style>
 

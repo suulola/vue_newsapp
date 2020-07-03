@@ -1,12 +1,13 @@
 <template>
   <div class="pure-menu pure-menu-horizontal">
     <div class="container">
-      <router-link to="/" class="pure-menu-heading pure-menu-link"
-        >Home</router-link
-      >
+      <router-link to="/" class="pure-menu-heading pure-menu-link">Home</router-link>
       <ul class="pure-menu-list">
         <li class="pure-menu-item">
           <router-link class="pure-menu-link" to="/about">About</router-link>
+        </li>
+        <li class="pure-menu-item">
+          <router-link class="pure-menu-link" to="/new">Latest</router-link>
         </li>
       </ul>
     </div>
@@ -14,16 +15,19 @@
 </template>
 
 <script>
-  export default {
-    name: "Navbar"
-  };
+export default {
+  name: "Navbar"
+};
 </script>
 
 <style scoped>
-  .pure-menu {
-    background-color: #e17842;
-  }
-  .pure-menu a {
-    color: white;
-  }
+.pure-menu {
+  background-color: #e17842;
+}
+.pure-menu a {
+  color: white;
+}
+.container {
+  margin-left: 30px;
+}
 </style>
