@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import axios from "axios";
 import Item from "@/views/Item.vue";
 export default {
   name: "New",
@@ -16,32 +15,13 @@ export default {
   data: function() {
     return {
       err: "",
-      stories: []
+      stories: this.$store.state.newStories
     };
   },
   methods: {
-    fetchLatestNews() {
-      axios
-        .get("https://hacker-news.firebaseio.com/v0/newstories.json")
-        .then(result => {
-          this.results = result.data.slice(0, 10);
-          this.results.forEach(item => {
-            axios
-              .get(`https://hacker-news.firebaseio.com/v0/item/${item}.json`)
-              .then(output => {
-                this.stories.push(output);
-              });
-          });
-        })
-        .catch(err => {
-          console.log("err");
-          console.log(err);
-          this.err = err;
-        });
-    }
   },
   created: function() {
-    this.fetchLatestNews();
+   if(this.$store.state.newStories.length === 0) this.$store.dispatch('fetch_new_stories');
   }
 };
 </script>

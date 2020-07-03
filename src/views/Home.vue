@@ -1,5 +1,4 @@
 <script>
-import axios from "axios";
 import Item from '@/views/Item.vue'
 
 export default {
@@ -10,35 +9,15 @@ export default {
   data: function() {
     return {
       err: "",
-      stories: []
+      stories: this.$store.state.topStories
     };
   },
   methods: {
-    fetchNews() {
-      axios
-        .get(
-          "https://hacker-news.firebaseio.com/v0/topstories.json"
-        )
-        .then(result => {
-          this.results = result.data.slice(0,10);
-          this.results.forEach(item => {
-            axios.get(`https://hacker-news.firebaseio.com/v0/item/${item}.json`)
-            .then(output => {
-              this.stories.push(output)
-            })
-          })
-        })
-        .catch(err => {
-          console.log("err");
-          console.log(err);
-          this.err = err;
-        });
-    }
   },
   created: function() {
-    this.fetchNews();
+      if(this.$store.state.topStories.length === 0) this.$store.dispatch('fetch_top_stories');
   }
-};
+}
 </script>
 
 <template>
